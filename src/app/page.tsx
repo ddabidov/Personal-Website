@@ -1,65 +1,69 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import styles from "./site.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
+    <div className={styles.page} id="top">
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+        <section className={styles.hero} aria-labelledby="hero-heading">
+          <p className={styles.kicker}>Systems Engineer | Embedded + Test</p>
+          <h1 id="hero-heading">
+            Dan Abidov: Hardware and Embedded Engineer Focused on Automated
+            Test Systems, PCB Design, and Real-Time Firmware.
+          </h1>
+          <p className={styles.lede}>
+            I currently work at Spherea (Formerly Konrad Technologies) building
+            LabVIEW-based test architectures and integrated hardware-software
+            validation systems.
           </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <div className={styles.heroActions}>
+            <Link className={styles.primaryAction} href="/experience">
+              View Experience
+            </Link>
+            <Link className={styles.secondaryAction} href="/contact">
+              Contact
+            </Link>
+          </div>
+          <ul className={styles.metrics}>
+            <li>
+              <span>4+ Years</span>
+              Engineering experience across test, embedded, and hardware roles.
+            </li>
+            <li>
+              <span>BSE</span>
+              Computer Engineering degree with an Electrical Engineering minor.
+            </li>
+            <li>
+              <span>2025</span>
+              Graduated from Kettering University in December 2025.
+            </li>
+          </ul>
+        </section>
+
+        <section className={styles.section}>
+          <h2>About Me</h2>
+          <div className={styles.card}>
+            <p>
+              I am a Systems Engineer with a Computer Engineering background and
+              an Electrical Engineering minor from Kettering University. My work
+              sits at the intersection of automated test systems, embedded
+              firmware, and practical hardware development.
+            </p>
+            <p>
+              I enjoy building reliable technical workflows, debugging complex
+              mixed hardware-software systems, and translating requirements into
+              production-ready engineering outcomes.
+            </p>
+            <div className={styles.heroActions}>
+              <Link className={styles.secondaryAction} href="/projects">
+                View Projects
+              </Link>
+              <Link className={styles.secondaryAction} href="/contact">
+                Contact
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );
