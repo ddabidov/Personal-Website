@@ -1,4 +1,5 @@
 .nav-bar {
+  --royal-purple: #5d31d4;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -11,6 +12,7 @@
   border-bottom: 1px solid rgba(114, 89, 218, 0.48);
   background-color: rgba(6, 6, 10, 0.88);
   backdrop-filter: blur(12px);
+  animation: navEnter 0.45s ease both;
 }
 
 .nav-brand {
@@ -40,9 +42,18 @@
   align-items: center;
 }
 
+.nav-dropdown::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 0.6rem;
+}
+
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.4rem);
+  top: calc(100% + 0.12rem);
   left: 0;
   min-width: 11rem;
   border: 1px solid rgba(142, 117, 255, 0.45);
@@ -53,6 +64,7 @@
   flex-direction: column;
   gap: 0.3rem;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  animation: dropdownEnter 0.16s ease both;
 }
 
 .dropdown-menu-right {
@@ -79,7 +91,8 @@
   padding: 0.32rem 0.72rem;
   color: #ddd5ff;
   font-size: 0.84rem;
-  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .social-link {
@@ -89,14 +102,15 @@
 
 @media (hover: hover) and (pointer: fine) {
   .nav-link:hover {
-    border-color: rgba(173, 151, 255, 0.7);
-    background-color: rgba(153, 122, 255, 0.14);
+    border-color: var(--royal-purple);
+    background-color: var(--royal-purple);
     color: #ffffff;
+    transform: translateY(-1px);
   }
 
   .dropdown-link:hover {
-    border-color: rgba(173, 151, 255, 0.7);
-    background-color: rgba(153, 122, 255, 0.14);
+    border-color: var(--royal-purple);
+    background-color: var(--royal-purple);
     color: #ffffff;
   }
 }
@@ -128,12 +142,36 @@
 
   .dropdown-menu {
     left: auto;
-    top: calc(100% + 0.25rem);
+    top: calc(100% + 0.08rem);
     min-width: 9.5rem;
   }
 
   .nav-socials {
     display: none;
+  }
+}
+
+@keyframes navEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownEnter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

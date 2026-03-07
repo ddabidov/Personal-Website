@@ -12,7 +12,7 @@ export default function Home() {
             Test Systems, PCB Design, and Real-Time Firmware.
           </h1>
           <p className={styles.lede}>
-            I currently work at Spherea (Formerly Konrad Technologies) building
+            Currently Working at Spherea (Formerly Konrad Technologies) building
             LabVIEW-based test architectures and integrated hardware-software
             validation systems.
           </p>
