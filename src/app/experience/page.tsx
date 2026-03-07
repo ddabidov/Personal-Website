@@ -1,8 +1,7 @@
 import Link from "next/link";
+import ProjectTimeline from "../UI/ProjectTimeline/ProjectTimeline";
 import styles from "../site.module.css";
-import { education, experience, projects, skills } from "../content/resumeData";
-
-const reversedProjects = [...projects].reverse();
+import { education, experience, skills } from "../content/resumeData";
 
 export default function ExperiencePage() {
   return (
@@ -61,28 +60,16 @@ export default function ExperiencePage() {
           </div>
         </section>
 
-        <section id="projects" className={styles.section}>
+        <section
+          id="projects"
+          className={`${styles.section} ${styles.sectionCentered}`}
+        >
           <h2>Projects</h2>
-          <div className={styles.projectGrid}>
-            {reversedProjects.map((project) => (
-              <Link
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                className={styles.projectCardLink}
-              >
-                <article className={styles.projectCard}>
-                  <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
-                  <p className={styles.projectMeta}>
-                    <strong>Stack:</strong> {project.stack}
-                  </p>
-                  <p className={styles.projectMeta}>
-                    <strong>Outcome:</strong> {project.outcome}
-                  </p>
-                </article>
-              </Link>
-            ))}
-          </div>
+          <p className={styles.sectionIntro}>
+            Same interactive project timeline layout used on the Projects page,
+            with newest work first.
+          </p>
+          <ProjectTimeline />
         </section>
 
         <section id="skills" className={styles.section}>

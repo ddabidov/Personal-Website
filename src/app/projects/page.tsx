@@ -1,8 +1,5 @@
-import Link from "next/link";
-import { projects } from "../content/resumeData";
+import ProjectTimeline from "../UI/ProjectTimeline/ProjectTimeline";
 import styles from "../site.module.css";
-
-const reversedProjects = [...projects].reverse();
 
 export default function ProjectsPage() {
   return (
@@ -17,27 +14,13 @@ export default function ProjectsPage() {
           </p>
         </section>
 
-        <section className={styles.section}>
-          <div className={styles.projectGrid}>
-            {reversedProjects.map((project) => (
-              <Link
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                className={styles.projectCardLink}
-              >
-                <article className={styles.projectCard}>
-                  <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
-                  <p className={styles.projectMeta}>
-                    <strong>Stack:</strong> {project.stack}
-                  </p>
-                  <p className={styles.projectMeta}>
-                    <strong>Outcome:</strong> {project.outcome}
-                  </p>
-                </article>
-              </Link>
-            ))}
-          </div>
+        <section className={`${styles.section} ${styles.sectionCentered}`}>
+          <h2>Project Timeline</h2>
+          <p className={styles.sectionIntro}>
+            Newest projects appear first. Hover or focus a row to preview the
+            build details, then open the full project page.
+          </p>
+          <ProjectTimeline />
         </section>
       </main>
     </div>

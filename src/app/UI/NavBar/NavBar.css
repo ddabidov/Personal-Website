@@ -1,5 +1,5 @@
 .nav-bar {
-  --royal-purple: #5d31d4;
+  --royal-purple: #7851A9;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -56,7 +56,7 @@
   top: calc(100% + 0.12rem);
   left: 0;
   min-width: 11rem;
-  border: 1px solid rgba(142, 117, 255, 0.45);
+  border: 2px solid rgba(142, 117, 255, 0.45);
   border-radius: 12px;
   background: rgba(13, 12, 22, 0.97);
   padding: 0.45rem;
@@ -104,14 +104,38 @@
   .nav-link:hover {
     border-color: var(--royal-purple);
     background-color: var(--royal-purple);
+    background-image: radial-gradient(
+      circle at center,
+      rgba(186, 165, 255, 0.95) 0%,
+      var(--royal-purple) 55%,
+      var(--royal-purple) 100%
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0% 0%;
     color: #ffffff;
     transform: translateY(-1px);
+    animation:
+      purpleCenterSpread 0.22s ease-out forwards,
+      purpleBloom 0.32s ease-out 0.22s;
   }
 
   .dropdown-link:hover {
     border-color: var(--royal-purple);
     background-color: var(--royal-purple);
+    background-image: radial-gradient(
+      circle at center,
+      rgba(186, 165, 255, 0.95) 0%,
+      var(--royal-purple) 55%,
+      var(--royal-purple) 100%
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0% 0%;
     color: #ffffff;
+    animation:
+      purpleCenterSpread 0.22s ease-out forwards,
+      purpleBloom 0.32s ease-out 0.22s;
   }
 }
 
@@ -130,10 +154,9 @@
   .nav-links {
     order: 2;
     width: 100%;
-    overflow-x: auto;
     padding-bottom: 0.2rem;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .nav-dropdown {
@@ -175,10 +198,47 @@
   }
 }
 
+@keyframes purpleBloom {
+  0% {
+    box-shadow: 0 0 0 rgba(143, 99, 255, 0);
+  }
+
+  65% {
+    box-shadow: 0 0 0.8rem rgba(143, 99, 255, 0.55),
+      0 0 1.35rem rgba(143, 99, 255, 0.32);
+  }
+
+  100% {
+    box-shadow: 0 0 0.3rem rgba(143, 99, 255, 0.32);
+  }
+}
+
+@keyframes purpleCenterSpread {
+  from {
+    background-size: 0% 0%;
+  }
+
+  to {
+    background-size: 240% 240%;
+  }
+}
+
 @media (max-width: 640px) {
   .dropdown-menu,
   .dropdown-menu-right {
     right: auto;
     left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link,
+  .dropdown-link {
+    transition: none;
+  }
+
+  .nav-link:hover,
+  .dropdown-link:hover {
+    animation: none;
   }
 }
