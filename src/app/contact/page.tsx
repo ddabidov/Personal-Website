@@ -1,4 +1,4 @@
-import Link from "next/link";
+import ContactForm from "../UI/ContactForm/ContactForm";
 import styles from "../site.module.css";
 
 export default function ContactPage() {
@@ -12,25 +12,7 @@ export default function ContactPage() {
             Available for Systems Engineering, Embedded Development, and Test
             Automation opportunities.
           </p>
-          <div className={styles.contactActions}>
-            <a className={styles.primaryAction} href="mailto:ddabidov@gmail.com">
-              ddabidov@gmail.com
-            </a>
-            <a className={styles.secondaryAction} href="tel:+15205994990">
-              520-599-4990
-            </a>
-            <a
-              className={styles.secondaryAction}
-              href="https://www.linkedin.com/in/dan-abidov"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn
-            </a>
-            <Link className={styles.secondaryAction} href="/resume">
-              Resume
-            </Link>
-          </div>
+          <ContactForm />
         </section>
       </main>
     </div>

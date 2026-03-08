@@ -29,7 +29,7 @@ export default function NavBar() {
         <div className="nav-dropdown">
           <Link href="/contact" className="nav-link">Contact</Link>
           <div className="dropdown-menu dropdown-menu-right">
-            <a className="dropdown-link" href="mailto:ddabidov@gmail.com">Email</a>
+            <Link href="/contact" className="dropdown-link">Contact Form</Link>
             <a
               className="dropdown-link"
               href="https://www.linkedin.com/in/dan-abidov"
