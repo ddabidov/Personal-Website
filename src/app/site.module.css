@@ -223,7 +223,7 @@
   border-radius: 12px;
   background: rgba(15, 15, 24, 0.86);
   padding: 0.95rem 1rem 1rem 1.1rem;
-  cursor: pointer;
+  cursor: default;
 }
 
 .timelineDate {
@@ -476,19 +476,67 @@
 
 @media (max-width: 700px) {
   .main {
-    width: 96vw;
-    padding-inline: 2vw;
+    width: 100%;
+    padding: 1.65rem 0.85rem 4rem;
+    gap: 1.75rem;
+  }
+
+  .hero {
+    gap: 0.85rem;
+    padding: 1rem;
+    border-radius: 18px;
+  }
+
+  .section {
+    gap: 0.75rem;
+  }
+
+  .metrics li {
+    padding: 0.85rem 0.9rem;
   }
 
   .heroActions,
   .contactActions {
+    width: 100%;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+  }
+
+  .heroActions .primaryAction,
+  .heroActions .secondaryAction,
+  .contactActions .primaryAction,
+  .contactActions .secondaryAction {
+    width: 100%;
   }
 
   .articleHeader {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .experienceBullets {
+    max-height: none;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding-inline: 0.7rem;
+    gap: 1.5rem;
+  }
+
+  .hero {
+    padding: 0.95rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 10vw, 2.6rem);
+    line-height: 1.02;
+  }
+
+  .lede {
+    font-size: 1rem;
   }
 }
 

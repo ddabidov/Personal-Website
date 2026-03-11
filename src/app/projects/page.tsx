@@ -17,8 +17,8 @@ export default function ProjectsPage() {
         <section className={`${styles.section} ${styles.sectionCentered}`}>
           <h2>Project Timeline</h2>
           <p className={styles.sectionIntro}>
-            Newest projects appear first. Hover or focus a row to preview the
-            build details, then open the full project page.
+            Newest projects appear first. Open any row for the full project
+            page, with desktop hover and focus adding a quick detail preview.
           </p>
           <ProjectTimeline />
         </section>
