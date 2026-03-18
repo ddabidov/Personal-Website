@@ -1,8 +1,12 @@
-import Link from "next/link";
-import { projects } from "../content/resumeData";
+import type { Metadata } from "next";
+import ProjectTimeline from "../UI/ProjectTimeline/ProjectTimeline";
 import styles from "../site.module.css";
 
-const reversedProjects = [...projects].reverse();
+export const metadata: Metadata = {
+  title: "Dan Abidov - Projects | Embedded, PCB, LabVIEW Validation",
+  description:
+    "Engineering projects covering automated cable validation, mixed-signal board design, high-power PCB debugging, and embedded wireless control.",
+};
 
 export default function ProjectsPage() {
   return (
@@ -10,34 +14,14 @@ export default function ProjectsPage() {
       <main className={styles.main}>
         <section className={styles.hero}>
           <p className={styles.kicker}>Projects</p>
-          <h1>Technical Projects</h1>
+          <h1>Projects</h1>
           <p className={styles.lede}>
-            Project summaries and deeper build notes across hardware, firmware,
-            and system validation.
+            Newest projects appear first. Open a row to jump straight into the full project details.
           </p>
         </section>
 
-        <section className={styles.section}>
-          <div className={styles.projectGrid}>
-            {reversedProjects.map((project) => (
-              <Link
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                className={styles.projectCardLink}
-              >
-                <article className={styles.projectCard}>
-                  <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
-                  <p className={styles.projectMeta}>
-                    <strong>Stack:</strong> {project.stack}
-                  </p>
-                  <p className={styles.projectMeta}>
-                    <strong>Outcome:</strong> {project.outcome}
-                  </p>
-                </article>
-              </Link>
-            ))}
-          </div>
+        <section className={`${styles.section} ${styles.sectionCentered}`}>
+          <ProjectTimeline />
         </section>
       </main>
     </div>

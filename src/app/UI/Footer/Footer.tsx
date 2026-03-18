@@ -1,3 +1,4 @@
+import Link from "next/link";
 import "./Footer.css";
 
 export default function Footer() {
@@ -5,7 +6,7 @@ export default function Footer() {
     <footer className="site-footer">
       <p className="footer-text">Dan Abidov | Systems Engineer</p>
       <div className="footer-links">
-        <a href="mailto:ddabidov@gmail.com">ddabidov@gmail.com</a>
+        <Link href="/contact">Use Contact Form</Link>
         <a
           href="https://www.linkedin.com/in/dan-abidov"
           target="_blank"
