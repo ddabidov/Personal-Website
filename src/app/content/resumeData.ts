@@ -1,134 +1,183 @@
+export type AudienceSegment = "embedded" | "test-automation" | "consulting";
+
+export type QuantMetric = {
+  label: string;
+  value: string;
+};
+
+export type ProjectMeta = {
+  slug: string;
+  date: string;
+  title: string;
+  summary: string;
+  ctaSummary: string;
+  stack: string;
+  repoUrl: string;
+  audiences: AudienceSegment[];
+};
+
+export type ExperienceEntry = {
+  id: string;
+  period: string;
+  role: string;
+  company: string;
+  summary: string;
+  audiences: AudienceSegment[];
+  resultBullets: string[];
+  metrics: QuantMetric[];
+};
+
 export const projects = [
   {
     slug: "automatic-cable-harness-tester",
+    date: "2025-08-01",
     title: "Automatic Cable and Harness Tester (Senior Thesis)",
     summary:
-      "Investigated and implemented an automated cable verification workflow through Konrad Technologies to replace manual test steps.",
+      "Built an automated LabVIEW cable and harness validation workflow to replace repetitive manual checks and improve production-style verification readiness.",
+    ctaSummary:
+      "LabVIEW-driven cable validation workflow built to reduce manual verification effort and improve repeatability.",
     stack: "NI LabVIEW, Automated Test Engineering, Requirements Analysis",
-    outcome:
-      "Improved quality checks and reduced manual verification time by automating repeatable validation paths.",
-    repoUrl: "https://github.com/ddabidov",
-    article: [
-      "This thesis focused on replacing repetitive manual cable verification with a structured automated workflow. The goal was to improve repeatability, reduce verification time, and increase confidence in final test results.",
-      "I implemented system-level test logic in LabVIEW, aligned validation behavior with requirements, and built a process that reduced manual intervention while preserving traceability.",
-      "The final output was a practical test flow that supported more consistent quality checks and better production efficiency.",
-    ],
+    repoUrl: "",
+    audiences: ["test-automation", "consulting"],
   },
   {
     slug: "four-player-wireless-game-station",
+    date: "2025-06-01",
     title: "4-Player Wireless Game Station (Capstone)",
     summary:
-      "Designed a multi-node embedded gaming platform using RP2040 controllers and NRF24 wireless communication.",
+      "Designed a multi-node embedded gaming platform using RP2040 controllers and NRF24 links for responsive multiplayer control.",
+    ctaSummary:
+      "Embedded multiplayer platform focused on low-latency input handling and stable multi-node wireless integration.",
     stack: "C/C++, RP2040, NRF24, Embedded Networking",
-    outcome:
-      "Delivered a working team capstone integrating real-time input handling, wireless links, and embedded control logic.",
-    repoUrl: "https://github.com/ddabidov",
-    article: [
-      "This capstone project explored reliable low-latency multiplayer communication on resource-constrained hardware using RP2040 and NRF24 devices.",
-      "I contributed to embedded firmware architecture, wireless messaging behavior, and integration across multiple game nodes to maintain responsiveness.",
-      "The final system demonstrated stable multi-node operation and consistent embedded control behavior in a real demo environment.",
-    ],
+    repoUrl: "https://github.com/ddabidov/CE-Capstone-Project",
+    audiences: ["embedded", "consulting"],
   },
   {
     slug: "high-power-pulse-generator-pcb",
+    date: "2025-06-01",
     title: "High-Power Pulse Generator PCB",
     summary:
-      "Developed a high-power switching spark generator for electrical discharge machining and iterated hardware revisions after bring-up debugging.",
+      "Developed and debugged a high-power switching board for electrical discharge machining with adaptive voltage positioning and peak current control.",
+    ctaSummary:
+      "High-power PCB bring-up and control-loop debugging for repeatable spark regulation under demanding switching conditions.",
     stack: "Power Electronics, PCB Debugging, Control Loops",
-    outcome:
-      "Implemented adaptive voltage positioning and peak current mode control for spark regulation.",
-    repoUrl: "https://github.com/ddabidov",
-    article: [
-      "This project centered on switching behavior for electrical discharge machining, where pulse shape and current control are critical to predictable performance.",
-      "I debugged initial board revisions, analyzed control behavior, and iterated hardware to improve stability under high-power conditions.",
-      "Adaptive voltage positioning and peak current mode control were used to achieve improved spark regulation and repeatable operation.",
-    ],
+    repoUrl: "",
+    audiences: ["embedded", "consulting"],
   },
   {
     slug: "high-fidelity-dac",
+    date: "2026-01-01",
     title: "High-Fidelity Digital-to-Analog Converter",
     summary:
-      "Built a low-noise mixed-signal DAC platform with USB-to-I2S bridge and custom analog amplification stage.",
+      "Built a mixed-signal DAC platform with USB-to-I2S transport and a custom analog stage for low-noise audio conversion.",
+    ctaSummary:
+      "Mixed-signal board design covering digital transport, analog output staging, and practical bring-up access for low-noise audio performance.",
     stack: "XMOS MCU, ES9039 DAC, LTspice, PCB Fabrication",
-    outcome:
-      "Completed design and fabrication of a mixed-signal board focused on low-noise audio performance.",
-    repoUrl: "https://github.com/ddabidov",
-    article: [
-      "This design combined digital transport and analog output stages for a high-fidelity converter platform with mixed-signal layout constraints.",
-      "I implemented a USB interface through XMOS as an I2S bridge, built an analog stage in LTspice, and translated the design to a fabricated board.",
-      "The final board targeted low-noise behavior, practical debug access, and high signal integrity across digital and analog domains.",
-    ],
+    repoUrl: "https://github.com/ddabidov/Headphone-DAC-AMP",
+    audiences: ["embedded", "consulting"],
   },
-] as const;
+  {
+    slug: "nfc-business-card",
+    date: "2026-02-01",
+    title: "NFC Business Card",
+    summary:
+      "Designed a single-chip NFC business card using an NTAG213 with a tuned PCB trace antenna, minimizing the BOM to one component while packing the back with practical engineering references.",
+    ctaSummary:
+      "Single-chip NFC card with a custom trace antenna tuned to the NTAG213's internal capacitance, doubling as an engineering reference tool.",
+    stack: "NTAG213, PCB Antenna Design, NFC, KiCad",
+    repoUrl: "https://github.com/ddabidov/NFC-Buisness-Card",
+    audiences: ["embedded", "consulting"],
+  },
+] satisfies readonly ProjectMeta[];
 
 export const experience = [
   {
+    id: "spherea-systems-engineer",
     period: "December 2025 - Present",
     role: "Systems Engineer",
-    company: "Spherea (Formerly Konrad Technologies) - Farmington Hills, MI",
-    bullets: [
-      "Programmed test system architecture and device drivers in NI LabVIEW.",
-      "Integrated hardware and software for automated test systems with high measurement accuracy.",
-      "Conducted self-tests and manual verification to validate hardware system performance.",
+    company: "Spherea (formerly Konrad Technologies) - Farmington Hills, MI",
+    summary:
+      "Builds and supports LabVIEW-based test architectures used for integrated hardware and software validation.",
+    audiences: ["test-automation", "consulting"],
+    resultBullets: [
+      "Programs test system architecture and device-driver behavior in NI LabVIEW for automated validation workflows.",
+      "Integrates measurement hardware and software to support repeatable system verification.",
+      "Uses self-tests and hands-on validation to confirm hardware readiness before broader deployment.",
     ],
+    metrics: [],
   },
   {
+    id: "spherea-coop",
     period: "June 2023 - December 2025",
     role: "Systems Engineering Co-Op",
-    company: "Spherea (Formerly Konrad Technologies) - Farmington Hills, MI",
-    bullets: [
-      "Automated manual cable verification processes as part of thesis work.",
-      "Supported requirements analysis and validation for production test workflows.",
-      "Built tools focused on quality and test-cycle efficiency improvements.",
+    company: "Spherea (formerly Konrad Technologies) - Farmington Hills, MI",
+    summary:
+      "Focused on automated validation workflows and requirement-aligned production test support.",
+    audiences: ["test-automation", "consulting"],
+    resultBullets: [
+      "Automated manual cable verification processes as part of thesis work tied to production-style validation goals.",
+      "Supported requirements analysis and validation planning for production test workflows.",
+      "Built tools aimed at improving test-cycle efficiency and reducing repetitive operator effort.",
     ],
+    metrics: [],
   },
   {
+    id: "actalent-hardware-test",
     period: "August 2021 - March 2023",
     role: "Hardware Test Engineer",
     company: "Actalent Services - Troy, MI",
-    bullets: [
+    summary:
+      "Worked across PCB design, firmware migration, and test-support tooling for hardware development teams.",
+    audiences: ["embedded", "consulting"],
+    resultBullets: [
       "Designed high-density 6-layer fiber-optic PCBs in Altium Designer.",
       "Ported FreeRTOS-based firmware to updated microcontroller hardware platforms.",
-      "Implemented an asset tracking system to improve operational efficiency.",
+      "Implemented an asset tracking system that improved visibility into equipment usage and ownership.",
     ],
+    metrics: [],
   },
   {
+    id: "kettering-makerspace",
     period: "November 2021 - December 2025",
     role: "Makerspace Student Lead",
     company: "Kettering University - Flint, MI",
-    bullets: [
-      "Upgraded equipment by introducing high-performance 3D printers and workflows.",
+    summary:
+      "Led makerspace operations, equipment upgrades, prototyping workflows, and student training.",
+    audiences: ["embedded", "consulting"],
+    resultBullets: [
+      "Upgraded equipment by introducing higher-performance 3D printing workflows.",
       "Led student workshops on prototyping, 3D printing, and circuit development.",
-      "Established a PCB and circuit prototyping station and managed procurement workflows.",
+      "Established a PCB and circuit prototyping station while managing procurement and upkeep.",
     ],
+    metrics: [],
   },
-] as const;
+] satisfies readonly ExperienceEntry[];
 
 export const education = {
   school: "Kettering University - Flint, MI",
-  period: "2021 - 2025 (Graduated December 2025)",
-  degree: "BSE in Computer Engineering, Electrical Engineering Minor",
+  degree: "B.S.E. in Computer Engineering, Electrical Engineering minor",
+  graduation: "Graduated December 2025",
   gpa: "GPA: 3.04",
   coursework:
     "Real-Time Embedded Systems, PCB Design and Testing, Microcomputers, Internet of Things, Electronics and Circuits, Signals and Systems",
   activities:
-    "Makerspace Leader, SAE Aero Design, Phi Gamma Delta Chapter Leader",
+    "Makerspace Leader, SAE Aero Design, Phi Gamma Delta chapter leadership",
   capstone:
-    "Capstone Project: 4-Player Wireless Game Station (RP2040 and NRF24 Based)",
+    "Capstone Project: 4-Player Wireless Game Station (RP2040 and NRF24 based)",
   thesis:
-    "Senior Thesis: Investigation and Implementation of an Automatic Cable and Harness Tester",
+    "Senior Thesis: Investigation and implementation of an automatic cable and harness tester",
 } as const;
 
 export const skills = [
   {
     title: "Hardware and PCB Design",
     items:
-      "PCB Prototyping, Altium Designer, KiCad, Cable and Harness Design, Hardware Debugging, Electrical Analysis",
+      "PCB prototyping, Altium Designer, KiCad, cable and harness design, hardware debugging, electrical analysis",
   },
   {
     title: "Embedded Systems and Firmware",
     items:
-      "C/C++, STM32, ESP32, RP Platforms, XMOS, Peripheral Driver Development, Object-Oriented Programming, Firmware Debugging, Real-Time Systems, LabVIEW DQMH",
+      "C/C++, STM32, ESP32, RP platforms, XMOS, peripheral driver development, firmware debugging, real-time systems, LabVIEW DQMH",
   },
   {
     title: "Software and Tools",
@@ -137,11 +186,23 @@ export const skills = [
   {
     title: "Testing and Engineering Systems",
     items:
-      "NI PXIe and cDAQ Configuration, Automated Testing (LabVIEW), DAQ Driver Integration, Requirements Traceability",
+      "NI PXIe and cDAQ configuration, automated testing in LabVIEW, DAQ driver integration, requirements traceability",
   },
   {
     title: "Prototyping and Fabrication",
     items:
-      "PCBA Assembly, SMD Bring-Up, 3D Printing, System Assembly, Equipment Maintenance",
+      "PCBA assembly, SMD bring-up, 3D printing, system assembly, equipment maintenance",
   },
 ] as const;
+
+export function getProjectsByAudience(audience: AudienceSegment) {
+  return projects.filter((project) =>
+    (project.audiences as readonly AudienceSegment[]).includes(audience),
+  );
+}
+
+export function getExperienceByAudience(audience: AudienceSegment) {
+  return experience.filter((role) =>
+    (role.audiences as readonly AudienceSegment[]).includes(audience),
+  );
+}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { projectsTimeline } from "@/data/projectsTimeline";
+import { projects } from "@/app/content/resumeData";
 import styles from "./ProjectTimeline.module.css";
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -20,7 +20,7 @@ function formatTimelineDate(date: string) {
   return dateFormatter.format(new Date(timestamp));
 }
 
-const timelineItems = [...projectsTimeline].sort(
+const timelineItems = [...projects].sort(
   (a, b) => toTimestamp(b.date) - toTimestamp(a.date),
 );
 
@@ -29,12 +29,12 @@ export default function ProjectTimeline() {
     <div className={styles.wrapper}>
       <ol className={styles.timeline} aria-label="Project timeline">
         {timelineItems.map((item) => (
-          <li key={item.href} className={styles.timelineEntry}>
+          <li key={item.slug} className={styles.timelineEntry}>
             <span className={styles.node} aria-hidden="true" />
-            <Link href={item.href} className={styles.timelineLink}>
+            <Link href={`/projects/${item.slug}`} className={styles.timelineLink}>
               <p className={styles.date}>{formatTimelineDate(item.date)}</p>
               <h3 className={styles.title}>{item.title}</h3>
-              <p className={styles.summary}>{item.summary}</p>
+              <p className={styles.summary}>{item.ctaSummary}</p>
             </Link>
           </li>
         ))}

@@ -1,6 +1,6 @@
 export const LINKEDIN_URL = "https://www.linkedin.com/in/dan-abidov";
 
-export const CONTACT_TARGET_EMAIL = process.env.NEXT_PUBLIC_CONTACT_TARGET ?? "";
+export const CONTACT_PUBLIC_EMAIL = process.env.NEXT_PUBLIC_CONTACT_PUBLIC_EMAIL || "";
 
 export const INQUIRY_TYPES = [
   "Job Opportunity",

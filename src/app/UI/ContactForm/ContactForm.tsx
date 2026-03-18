@@ -2,7 +2,7 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import {
-  CONTACT_TARGET_EMAIL,
+  CONTACT_PUBLIC_EMAIL,
   INQUIRY_TYPES,
   LINKEDIN_URL,
   TIMELINE_OPTIONS,
@@ -10,12 +10,6 @@ import {
 import styles from "./ContactForm.module.css";
 
 export type InquiryType = (typeof INQUIRY_TYPES)[number];
-export type ContactFormState =
-  | "idle"
-  | "validating"
-  | "launching"
-  | "success"
-  | "fallback";
 
 type ContactFormValues = {
   fullName: string;
@@ -88,11 +82,6 @@ function buildMailBody(values: ContactFormValues) {
 export default function ContactForm() {
   const [values, setValues] = useState<ContactFormValues>(INITIAL_VALUES);
   const [errors, setErrors] = useState<ContactFormErrors>({});
-  const [formState, setFormState] = useState<ContactFormState>("idle");
-  const [statusNote, setStatusNote] = useState("");
-  const [lastComposedBody, setLastComposedBody] = useState("");
-
-  const canShowFallback = formState === "success" || formState === "fallback";
 
   const composedSubject = useMemo(() => {
     if (!values.inquiryType || !values.subject.trim()) {
@@ -108,65 +97,48 @@ export default function ContactForm() {
   ) => {
     setValues((prev) => ({ ...prev, [key]: value }));
     setErrors((prev) => ({ ...prev, [key]: undefined }));
-    setStatusNote("");
-    if (formState !== "idle") {
-      setFormState("idle");
-    }
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormState("validating");
 
     const validationErrors = validate(values);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      setFormState("idle");
       return;
     }
 
     const subject = `[${values.inquiryType}] ${values.subject.trim()}`;
     const body = buildMailBody(values);
-    setLastComposedBody(body);
-
-    if (!CONTACT_TARGET_EMAIL) {
-      setFormState("fallback");
-      setStatusNote(
-        "Email destination is not configured. Use the copy option and contact through LinkedIn.",
-      );
-      return;
-    }
-
-    setFormState("launching");
-    const mailtoHref = `mailto:${encodeURIComponent(CONTACT_TARGET_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoHref;
-    setFormState("success");
-    setStatusNote(
-      "Your email app should open. If it does not, copy your message and use LinkedIn.",
-    );
-  };
-
-  const handleCopyMessage = async () => {
-    if (!lastComposedBody) {
-      return;
-    }
-
-    try {
-      await navigator.clipboard.writeText(lastComposedBody);
-      setStatusNote("Message copied. Paste it into your preferred contact channel.");
-    } catch {
-      setStatusNote("Unable to copy automatically. Select and copy the message manually.");
-    }
+    const mailtoUrl = `mailto:${CONTACT_PUBLIC_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoUrl;
   };
 
   return (
     <section className={styles.formShell} aria-labelledby="contact-form-heading">
+      <div className={styles.contactOptions}>
+        {CONTACT_PUBLIC_EMAIL ? (
+          <a className={styles.contactOption} href={`mailto:${CONTACT_PUBLIC_EMAIL}`}>
+            <span>Direct email</span>
+            <strong>{CONTACT_PUBLIC_EMAIL}</strong>
+          </a>
+        ) : null}
+        <a
+          className={styles.contactOption}
+          href={LINKEDIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>LinkedIn</span>
+          <strong>Open profile</strong>
+        </a>
+      </div>
+
       <h2 id="contact-form-heading" className={styles.formHeading}>
-        Contact Form
+        Send a Message
       </h2>
       <p className={styles.formIntro}>
-        Share the details below and this will open your email app with a
-        pre-filled message.
+        Fill out the form and hit send to open your email app with the message ready to go.
       </p>
 
       <form className={styles.formGrid} onSubmit={handleSubmit} noValidate>
@@ -265,12 +237,8 @@ export default function ContactForm() {
         </label>
 
         <div className={`${styles.actions} ${styles.fieldFull}`}>
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={formState === "launching"}
-          >
-            Open Email Draft
+          <button type="submit" className={styles.submitButton}>
+            Open in email app
           </button>
           <a
             className={styles.secondaryButton}
@@ -280,22 +248,12 @@ export default function ContactForm() {
           >
             Open LinkedIn
           </a>
-          {canShowFallback ? (
-            <button
-              type="button"
-              className={styles.secondaryButton}
-              onClick={handleCopyMessage}
-            >
-              Copy Message
-            </button>
-          ) : null}
         </div>
       </form>
 
-      <div className={styles.statusPanel}>
-        {statusNote ? <p>{statusNote}</p> : null}
-        {composedSubject && canShowFallback ? (
-          <p className={styles.composedSubject}>Draft subject: {composedSubject}</p>
+      <div className={styles.statusPanel} aria-live="polite">
+        {composedSubject ? (
+          <p className={styles.composedSubject}>Message subject: {composedSubject}</p>
         ) : null}
       </div>
     </section>
